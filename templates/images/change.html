@@ -1,0 +1,13 @@
+{% extends 'images/base_back.html' %}
+{% block title_header %}
+    {{ object.file.name }}
+{% endblock %}
+{% block body %}
+    <form method="get">
+        <ul style="list-style-type: none;">
+            {{ form.as_ul }}
+        </ul>
+        <input type="submit" value="Отправить">
+    </form>
+    <img src="data:image/{{ object.file_ext }};base64,{{ image }}">
+{% endblock %}

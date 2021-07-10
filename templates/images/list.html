@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title_header %} Список изображений {% endblock %}
+{% block body %}
+    <ul style="list-style-type: none;">
+    {% for image in object_list %}
+        <li>
+            <a href="{{ image.get_absolute_url }}">{{ image.file }}</a>
+        </li>
+    {% empty %}
+        <li>Нет доступных изображений</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'image_create' %}">Добавить изображение</a>
+{% endblock %}

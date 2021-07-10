@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block header %}
+    <a href="{% url 'image_list' %}">Назад к списку</a>
+    {{ block.super }}
+{% endblock %}
