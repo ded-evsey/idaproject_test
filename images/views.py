@@ -16,6 +16,11 @@ class ImageUploadView(CreateView):
     template_name = 'images/create.html'
     success_url = reverse_lazy('image_change')
 
+    def get_success_url(self):
+        return reverse_lazy(
+            'image_change', args=(self.object.pk,)
+        )
+
 
 class ImageChangeView(UpdateView):
     slug_field = 'pk'

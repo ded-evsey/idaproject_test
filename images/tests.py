@@ -132,3 +132,15 @@ class ImageTestCase(TestCase):
         self.assertEqual(
             resp.status_code, HTTPStatus.OK
         )
+        with open(self.path, 'rb') as file:
+            resp = self.client.post(
+                reverse('image_create'),
+                {'file': file}
+            )
+            import pdb;pdb.set_trace()
+            self.assertEqual(resp.status_code, HTTPStatus.OK)
+            self.assertTrue(
+                Image.objects.get(
+                    file__name=basename(self.path_2)
+                )
+            )

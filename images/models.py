@@ -20,9 +20,7 @@ class Image(models.Model):
         verbose_name_plural = 'Изображения'
 
     def get_absolute_url(self):
-        return reverse('image_change', kwargs={
-            'pk': self.pk
-        })
+        return reverse('image_change', args=(self.pk,))
 
     def filename(self):
         return self.file.name
