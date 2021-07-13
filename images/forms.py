@@ -19,9 +19,9 @@ class ImageUploadForm(forms.ModelForm):
         url = cleaned_data.get('url')
         file = cleaned_data.get('file')
         if url and file:
-            raise forms.ValidationError('Слишком много источников')
+            self.add_error('url', 'Выберите один источник')
         if not url and not file:
-            raise forms.ValidationError('Слишком мало источников')
+            self.add_error('url', 'Слишком мало источников')
         if url:
             res = request.urlopen(url)
             file_pil = PIL.Image.open(BytesIO(res.read()))
@@ -31,7 +31,8 @@ class ImageUploadForm(forms.ModelForm):
             file_pil.save(f_object, format=ext if ext != 'jpg' else 'jpeg')
             file = ContentFile(f_object.getvalue(), name=filename)
         cleaned_data['file'] = file
-        self.save()
+        if self.is_valid():
+            self.save()
         return cleaned_data
 
 
